@@ -28,7 +28,7 @@ public class CreditoController {
         return creditoService.obterTodos();
     }
 
-    @GetMapping("/:{id}")
+    @GetMapping("/{id}")
     public Optional<Credito> obterPorId(@PathVariable Integer id) {
         return creditoService.obterPorid(id);
     }
@@ -44,7 +44,7 @@ public class CreditoController {
         return "Credito com id" + id + " deletado com sucesso!";
     }
 
-    @PutMapping("/id")
+    @PutMapping("/{id}")
     public Credito atualizar(@RequestBody Credito credito, @PathVariable Integer id) {
         return creditoService.atualizar(id, credito);
     }

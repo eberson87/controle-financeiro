@@ -11,7 +11,7 @@ import com.teste.controlefinanceiro.model.exception.ResourceNotFoundException;
 @Repository
 public class CreditoRepository {
 
-    private List<Credito> credito = new ArrayList<Credito>();
+    private List<Credito> creditos = new ArrayList<Credito>();
     private Integer ultimoId = 0;
 
     /**
@@ -20,7 +20,7 @@ public class CreditoRepository {
      * @return Lista de Receitas
      */
     public List<Credito> obterTodos() {
-        return credito;
+        return creditos;
     }
 
     /**
@@ -30,7 +30,7 @@ public class CreditoRepository {
      * @return Retorna uma receita caso tenha sido localizado.
      */
     public Optional<Credito> obterPorid(Integer id) {
-        return credito
+        return creditos
                 .stream()
                 .filter(credito -> credito.getId() == id)
                 .findFirst();
@@ -46,7 +46,7 @@ public class CreditoRepository {
 
         ultimoId++;
         credito.setId(ultimoId);
-        credito.add(credito);
+        creditos.add(credito);
         return credito;
     }
 
@@ -56,7 +56,7 @@ public class CreditoRepository {
      * @param id credito a ser deletado
      */
     public void deletar(Integer id) {
-        credito.removeIf(credito -> credito.getId() == id);
+        creditos.removeIf(credito -> credito.getId() == id);
     }
 
     /**
@@ -73,7 +73,7 @@ public class CreditoRepository {
         }
 
         deletar(credito.getId());
-        credito.add(credito);
+        creditos.add(credito);
         return credito;
 
     }
