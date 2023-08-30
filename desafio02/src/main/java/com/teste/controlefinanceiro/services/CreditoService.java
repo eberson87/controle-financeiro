@@ -5,13 +5,13 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.teste.controlefinanceiro.model.Credito;
-import com.teste.controlefinanceiro.respository.CreditoRepository;
+import com.teste.controlefinanceiro.respository.CreditoRepository_old;
 
 @Service
 public class CreditoService {
 
     @Autowired
-    private CreditoRepository creditoRepository;
+    private CreditoRepository_old creditoRepository;
 
     /**
      * Metodo para retornar receitas

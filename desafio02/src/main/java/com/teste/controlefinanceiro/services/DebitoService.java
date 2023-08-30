@@ -6,13 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.teste.controlefinanceiro.model.Debito;
-import com.teste.controlefinanceiro.respository.DebitoRepository;
+import com.teste.controlefinanceiro.respository.DebitoRepository_old;
 
 @Service
 public class DebitoService {
 
     @Autowired
-    private DebitoRepository debitoRepository;
+    private DebitoRepository_old debitoRepository;
 
     /**
      * Metodo para retornar despesas

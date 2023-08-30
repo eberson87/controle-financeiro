@@ -10,7 +10,7 @@ import com.teste.controlefinanceiro.model.Debito;
 import com.teste.controlefinanceiro.model.exception.ResourceNotFoundException;
 
 @Repository
-public class DebitoRepository {
+public class DebitoRepository_old {
     private List<Debito> debitos = new ArrayList<Debito>();
     private Integer ultimoId = 0;
 

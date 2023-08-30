@@ -9,7 +9,7 @@ import com.teste.controlefinanceiro.model.Credito;
 import com.teste.controlefinanceiro.model.exception.ResourceNotFoundException;
 
 @Repository
-public class CreditoRepository {
+public class CreditoRepository_old {
 
     private List<Credito> creditos = new ArrayList<Credito>();
     private Integer ultimoId = 0;
