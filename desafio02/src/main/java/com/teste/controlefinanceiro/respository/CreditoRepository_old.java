@@ -78,4 +78,12 @@ public class CreditoRepository_old {
 
     }
 
+    public Credito save(Credito credito) {
+        return null;
+    }
+
+    public Optional<Credito> findById(Integer id) {
+        return null;
+    }
+
 }

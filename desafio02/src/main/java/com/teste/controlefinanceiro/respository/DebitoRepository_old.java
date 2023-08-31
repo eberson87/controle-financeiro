@@ -78,4 +78,12 @@ public class DebitoRepository_old {
         return debito;
 
     }
+
+    public Debito save(Debito debito) {
+        return null;
+    }
+
+    public Optional<Debito> findById(Integer id) {
+        return null;
+    }
 }
