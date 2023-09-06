@@ -1,4 +1,4 @@
-package com.teste.controlefinanceiro.respository;
+package com.teste.controlefinanceiro.repository;
 
 import java.util.ArrayList;
 import java.util.List;

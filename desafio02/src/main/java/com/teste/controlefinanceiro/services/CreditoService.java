@@ -9,14 +9,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.teste.controlefinanceiro.model.Credito;
 import com.teste.controlefinanceiro.model.exception.ResourceNotFoundException;
-import com.teste.controlefinanceiro.respository.CreditoRepository_old;
+import com.teste.controlefinanceiro.repository.CreditoRepository;
 import com.teste.controlefinanceiro.shared.CreditoDTO;
 
 @Service
 public class CreditoService {
 
     @Autowired
-    private CreditoRepository_old creditoRepository;
+    private CreditoRepository creditoRepository;
 
     /**
      * Metodo para retornar receitas
@@ -24,7 +24,7 @@ public class CreditoService {
      * @return Lista de receitas
      */
     public List<CreditoDTO> obterTodos() {
-        List<Credito> creditos = creditoRepository.obterTodos();
+        List<Credito> creditos = creditoRepository.findAll();
 
         return creditos.stream()
                 .map(credito -> new ModelMapper().map(credito, CreditoDTO.class))
@@ -38,7 +38,7 @@ public class CreditoService {
      * @return Retorna uma receita caso tenha sido localizado.
      */
     public Optional<CreditoDTO> obterPorid(Integer id) {
-        Optional<Credito> credito = creditoRepository.obterPorid(id);
+        Optional<Credito> credito = creditoRepository.findById(id);
 
         if (credito.isEmpty()) {
             throw new ResourceNotFoundException("Credito com id: " + id + "não encontrado");
@@ -61,9 +61,9 @@ public class CreditoService {
         ModelMapper mapper = new ModelMapper();
         Credito credito = mapper.map(creditoDto, Credito.class);
         credito = creditoRepository.save(credito);
-        creditoDto.setId(credito.getId());
 
-        return creditoDto;
+        return mapper.map(credito, CreditoDTO.class);
+
     }
 
     /**
@@ -78,7 +78,7 @@ public class CreditoService {
                     " Não foi possível deletar o produto com o id: " + id + " - Credito não encontrado");
         }
 
-        creditoRepository.deletar(id);
+        creditoRepository.deleteById(id);
     }
 
     /**

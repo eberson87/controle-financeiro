@@ -10,14 +10,14 @@ import org.springframework.stereotype.Service;
 
 import com.teste.controlefinanceiro.model.Debito;
 import com.teste.controlefinanceiro.model.exception.ResourceNotFoundException;
-import com.teste.controlefinanceiro.respository.DebitoRepository_old;
+import com.teste.controlefinanceiro.repository.DebitoRepository;
 import com.teste.controlefinanceiro.shared.DebitoDTO;
 
 @Service
 public class DebitoService {
 
     @Autowired
-    private DebitoRepository_old debitoRepository;
+    private DebitoRepository debitoRepository;
 
     /**
      * Metodo para retornar despesas
@@ -25,7 +25,7 @@ public class DebitoService {
      * @return Lista de despesas
      */
     public List<DebitoDTO> obterTodos() {
-        List<Debito> debitos = debitoRepository.obterTodos();
+        List<Debito> debitos = debitoRepository.findAll();
 
         return debitos.stream()
                 .map(debito -> new ModelMapper().map(debito, DebitoDTO.class))
@@ -39,7 +39,7 @@ public class DebitoService {
      * @return Retorna uma despesa caso tenha sido localizado.
      */
     public Optional<DebitoDTO> obterPorid(Integer id) {
-        Optional<Debito> debito = debitoRepository.obterPorid(id);
+        Optional<Debito> debito = debitoRepository.findById(id);
 
         if (debito.isEmpty()) {
             throw new ResourceNotFoundException("Debito com id: " + id + "não encontrado");
@@ -62,9 +62,8 @@ public class DebitoService {
         ModelMapper mapper = new ModelMapper();
         Debito debito = mapper.map(debitoDto, Debito.class);
         debito = debitoRepository.save(debito);
-        debitoDto.setId(debito.getId());
 
-        return debitoDto;
+        return mapper.map(debito, DebitoDTO.class);
     }
 
     /**
@@ -78,7 +77,7 @@ public class DebitoService {
             throw new ResourceNotFoundException(
                     "Não foi possível deletar o debito com o id " + id + " - Debito não encontrado");
         }
-        debitoRepository.deletar(id);
+        debitoRepository.deleteById(id);
     }
 
     /**
